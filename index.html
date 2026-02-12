@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERSOS UNITED</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #111;
+            background: url('fondoweb.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background: rgba(255,255,255,0.97);
+            padding: 1.2rem 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .nav-left ul {
+            list-style: none;
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-left a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .nav-left a:hover { color: #2e7d32; }
+        .center-title h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            text-align: center;
+            flex: 1;
+        }
+        .logo-right img {
+            height: 70px;
+            width: auto;
+        }
+        main {
+            padding-top: 140px;
+            padding-bottom: 6rem;
+        }
+        section {
+            background: rgba(255,255,255,0.94);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            margin: 3rem auto;
+            padding: 3rem 2.5rem;
+            max-width: 1000px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+        }
+        section:hover { transform: translateY(-4px); }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .hero-title {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .hero-title h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 0.8rem;
+        }
+        .hero-title p {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #333;
+        }
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #000;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .socio-section {
+            background: url('sociosimpatizante.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+        }
+        .socio-section .section-title { color: white; }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+        .card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 4px solid #000;
+        }
+        .btn {
+            background: #2e7d32;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1.5rem auto;
+            box-shadow: 0 6px 20px rgba(46,125,50,0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #1b5e20;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(46,125,50,0.5);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+        .modal img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            transition: transform 0.4s ease;
+        }
+        .modal img.zoomed { transform: scale(1.1); }
+        .modal-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4rem;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 20px;
+        }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+        }
+        footer {
+            background: rgba(255,255,255,0.97);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid #eee;
+            backdrop-filter: blur(10px);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        .footer-links a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-links a:hover { color: #2e7d32; }
+        @media (max-width: 900px) {
+            .header-inner { justify-content: center; }
+            .center-title h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <div class="nav-left">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Tienda</a></li>
+                    <li><a href="#">Plantel</a></li>
+                    <li><a href="https://www.instagram.com/persos_united_oficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Seguinos en Instagram</a></li>
+                </ul>
+            </div>
+            <div class="center-title">
+                <h1>PERSOS UNITED</h1>
+            </div>
+            <div class="logo-right">
+                <img src="logoweb.png" alt="Logo Persos United">
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- 1. Video Portada -->
+    <section>
+        <div class="video-wrapper">
+            <video autoplay loop muted playsinline preload="auto" poster="fondoweb.png">
+                <source src="videosocio.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+    </section>
+
+    <!-- Texto Hero -->
+    <section class="hero-title">
+        <h1>Un equipo, una pasión. Sumate a la familia Persos United.</h1>
+        <p>Conoce como podes ser socio simpatizante de nuestro equipo y pasate por nuestra tienda web.</p>
+        <p style="margin-top: 1.5rem; font-size: 1.2rem; font-weight: 500;">
+            Persos United nació del amor por el fútbol y la amistad.<br>
+            Hoy damos el primer paso para construir algo más grande: una familia de hinchas, amigos y soñadores.<br>
+            ¡Hacete socio simpatizante y acompañanos en cada partido!
+        </p>
+    </section>
+
+    <!-- 2. Socio Simpatizante -->
+    <section class="socio-section">
+        <h2 class="section-title">💳 Tu apoyo nos hace más fuertes</h2>
+        <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; text-align: center;">
+            Con tu aporte como socio simpatizante ayudás al crecimiento del equipo: camisetas, partidos, entrenamientos, inscripciones, equipamiento del equipo y mucho más.<br>
+            Además, vas a recibir novedades exclusivas y sorteos entre los socios.<br>
+            ¡Sumate y formá parte de este proyecto desde el inicio!
+        </p>
+        <p style="text-align: center; font-size: 1.3rem; font-weight: 600;">
+            Conocé más de como hacerte socio de nuestro club.
+        </p>
+        <a href="https://persosunited.pages.dev/" class="btn" style="display: block; width: fit-content; margin: 2rem auto;">
+            Más información ⓘ
+        </a>
+    </section>
+
+    <!-- 3. Tienda Oficial -->
+    <section>
+        <h2 class="section-title">🛍️ Tienda oficial Persos United</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+            Llevá los colores y símbolos con orgullo.<br>
+            Descubrí nuestra línea de remeras, buzos y accesorios exclusivos.<br>
+            Cada compra ayuda a seguir haciendo crecer al club.
+        </p>
+        <div class="grid-4" id="tienda-grid">
+            <!-- Las imágenes reales no están especificadas, uso placeholders por ahora -->
+            <div class="card" data-img="tienda1.jpg"><img src="tienda1.jpg" alt="Producto 1"></div>
+            <div class="card" data-img="tienda2.jpg"><img src="tienda2.jpg" alt="Producto 2"></div>
+            <div class="card" data-img="tienda3.jpg"><img src="tienda3.jpg" alt="Producto 3"></div>
+            <div class="card" data-img="tienda4.jpg"><img src="tienda4.jpg" alt="Producto 4"></div>
+        </div>
+        <a href="#" class="btn">👕 Ir a la tienda</a>
+    </section>
+
+    <!-- 4. El equipo -->
+    <section>
+        <h2 class="section-title">⚽ El plantel Persos United</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+            Somos amigos, compañeros y soñadores con un mismo objetivo: disfrutar y competir con pasión.<br>
+            Conocé a los jugadores que representan a Persos dentro y fuera de la cancha.
+        </p>
+        <div class="grid-4" id="plantel-grid">
+            <!-- Usando fondoweb.png como placeholder -->
+            <div class="card" data-img="fondoweb.png"><img src="fondoweb.png" alt="Jugador 1"></div>
+            <div class="card" data-img="fondoweb.png"><img src="fondoweb.png" alt="Jugador 2"></div>
+            <div class="card" data-img="fondoweb.png"><img src="fondoweb.png" alt="Jugador 3"></div>
+            <div class="card" data-img="fondoweb.png"><img src="fondoweb.png" alt="Jugador 4"></div>
+        </div>
+        <a href="#" class="btn">Ver más Información del Plantel</a>
+    </section>
+
+    <!-- 5. Seguinos -->
+    <section>
+        <h2 class="section-title">📣 Viví el día a día del equipo</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+            Seguinos en redes para ver entrenamientos y momentos únicos de los Persos.<br>
+            ¡Compartí tus fotos con el hashtag #PersosUnited!
+        </p>
+        <div style="text-align: center;">
+            <a href="https://www.instagram.com/persos_united_oficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn" style="margin: 0 1rem;">
+                Instagram
+            </a>
+            <!-- Agregá TikTok cuando tengas el enlace -->
+            <!-- <a href="ENLACE_TIKTOK" target="_blank" class="btn">TikTok</a> -->
+        </div>
+    </section>
+
+</main>
+
+<!-- Modal para carrusel -->
+<div class="modal" id="imageModal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <div class="modal-content">
+        <span class="modal-arrow prev" onclick="changeImage(-1)">‹</span>
+        <img id="modalImage" src="" alt="Imagen ampliada">
+        <span class="modal-arrow next" onclick="changeImage(1)">›</span>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-logo">
+        <img src="logoweb.png" alt="Logo Persos United">
+    </div>
+    <div class="footer-links">
+        <ul>
+            <li><a href="#">Hacete socio</a></li>
+            <li><a href="#">Tienda</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="https://www.instagram.com/persos_united_oficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Seguinos en Instagram</a></li>
+        </ul>
+    </div>
+    <p>Persos United © 2019/2026 – Todos los derechos reservados.</p>
+    <p>“Un equipo, una pasión.”</p>
+</footer>
+
+<script>
+    // Acordeones
+    document.querySelectorAll('.accordion').forEach(acc => {
+        acc.addEventListener('click', () => {
+            const panel = acc.nextElementSibling;
+            const isOpen = panel.classList.contains('show');
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+            if (!isOpen) {
+                panel.classList.add('show');
+                setTimeout(() => acc.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
+            }
+        });
+    });
+
+    // Smooth scroll anclas
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Modal carrusel
+    let currentImages = [];
+    let currentIndex = 0;
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+
+    function openModal(images, index) {
+        currentImages = images;
+        currentIndex = index;
+        modalImg.src = currentImages[currentIndex];
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    function changeImage(direction) {
+        currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+        modalImg.src = currentImages[currentIndex];
+    }
+
+    // Tienda grid
+    document.querySelectorAll('#tienda-grid .card').forEach(card => {
+        card.addEventListener('click', () => {
+            const imgs = Array.from(document.querySelectorAll('#tienda-grid img')).map(img => img.src);
+            const idx = Array.from(document.querySelectorAll('#tienda-grid .card')).indexOf(card);
+            openModal(imgs, idx);
+        });
+    });
+
+    // Plantel grid
+    document.querySelectorAll('#plantel-grid .card').forEach(card => {
+        card.addEventListener('click', () => {
+            const imgs = Array.from(document.querySelectorAll('#plantel-grid img')).map(img => img.src);
+            const idx = Array.from(document.querySelectorAll('#plantel-grid .card')).indexOf(card);
+            openModal(imgs, idx);
+        });
+    });
+
+    modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+    });
+</script>
+
+</body>
+</html>
