@@ -79,6 +79,9 @@
             max-width: 1100px;
             backdrop-filter: blur(8px);
         }
+        main > section:first-child {
+            margin-top: 3rem; /* Margen blanco entre banner y video en móvil */
+        }
         .video-wrapper {
             position: relative;
             padding-bottom: 42.55%; /* 2.35:1 en desktop */
@@ -115,10 +118,18 @@
             color: #333;
         }
         .section-title {
-            font-size: 1.9rem;
+            font-size: 2rem; /* Achicado para no ser invasivo */
             font-weight: 800;
             text-align: center;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .audio-player {
+            text-align: center;
+            margin: 1.2rem 0;
+        }
+        .audio-player audio {
+            width: 100%;
+            max-width: 400px;
         }
         .socio-section {
             background: url('sociosimpatizante.png') no-repeat center center;
@@ -167,7 +178,6 @@
         .btn:hover {
             background: #1b5e20;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(46,125,50,0.4);
         }
         footer {
             background: rgba(255,255,255,0.97);
@@ -195,7 +205,7 @@
         }
         .footer-links a:hover { color: #2e7d32; }
 
-        /* Mobile optimizations */
+        /* Mobile-first optimizations */
         @media (max-width: 900px) {
             .header-inner { justify-content: center; gap: 0.8rem; }
             .nav-left ul { gap: 0.8rem; font-size: 0.85rem; }
@@ -204,14 +214,15 @@
             main { padding-top: 100px; }
             section { padding: 1.5rem 1rem; margin: 1.5rem auto; }
             .hero-title h1 { font-size: 1.9rem; }
-            .section-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.7rem; } /* Títulos más pequeños en móvil */
             .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; }
-            .video-wrapper { padding-bottom: 56.25%; } /* 16:9 en móvil para mejor visibilidad */
+            .btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; width: 100%; }
+            .video-wrapper { padding-bottom: 56.25%; } /* 16:9 en móvil para que se vea completo */
+            main > section:first-child { margin-top: 3rem; }
         }
         @media (max-width: 600px) {
             .center-title h1 { font-size: 1.6rem; }
-            .nav-left ul { gap: 0.6rem; font-size: 0.8rem; }
+            .nav-left a { font-size: 0.8rem; }
             .logo-right img { height: 45px; }
             main { padding-top: 90px; }
             .hero-title h1 { font-size: 1.7rem; }
@@ -221,6 +232,7 @@
     </style>
 </head>
 <body>
+
 <header>
     <div class="container">
         <div class="header-inner">
@@ -241,6 +253,7 @@
         </div>
     </div>
 </header>
+
 <main class="container">
     <section>
         <div class="video-wrapper">
@@ -250,6 +263,7 @@
             </video>
         </div>
     </section>
+
     <section class="hero-title">
         <h1>Un equipo, una pasión. Sumate a la familia Persos United.</h1>
         <p>Conoce como podes ser socio simpatizante de nuestro equipo y pasate por nuestra tienda web.</p>
@@ -259,6 +273,7 @@
             ¡Hacete socio simpatizante y acompañanos en cada partido!
         </p>
     </section>
+
     <section class="socio-section">
         <h2 class="section-title" style="color: white;">💳 Tu apoyo nos hace más fuertes</h2>
         <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto 1.5rem; text-align: center;">
@@ -273,6 +288,7 @@
             Más información ⓘ
         </a>
     </section>
+
     <section>
         <h2 class="section-title">🛍️ Tienda oficial Persos United</h2>
         <p style="text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem;">
@@ -288,8 +304,15 @@
         </div>
         <a href="#" class="btn">👕 Ir a la tienda</a>
     </section>
+
     <section>
         <h2 class="section-title">⚽ El plantel Persos United</h2>
+        <div class="audio-player">
+            <audio controls>
+                <source src="vamoslospersos.ogg" type="audio/ogg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
         <p style="text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem;">
             Somos amigos, compañeros y soñadores con un mismo objetivo: disfrutar y competir con pasión.<br>
             Conocé a los jugadores que representan a Persos dentro y fuera de la cancha.
@@ -302,6 +325,7 @@
         </div>
         <a href="#" class="btn">Ver más Información del Plantel</a>
     </section>
+
     <section>
         <h2 class="section-title">📣 Viví el día a día del equipo</h2>
         <p style="text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem;">
@@ -315,6 +339,7 @@
         </div>
     </section>
 </main>
+
 <footer>
     <div class="footer-logo">
         <img src="logoweb.png" alt="Logo Persos United">
