@@ -15,6 +15,7 @@
             background-attachment: fixed;
             min-height: 100vh;
             line-height: 1.6;
+            hyphens: auto; /* Evita palabras sueltas al final de línea */
         }
         .container {
             max-width: 1200px;
@@ -23,11 +24,11 @@
         }
         header {
             background: rgba(255,255,255,0.97);
-            padding: 0.8rem 0;
+            padding: 0.7rem 0; /* Más compacto */
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
             backdrop-filter: blur(10px);
         }
         .header-inner {
@@ -35,7 +36,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.6rem;
         }
         .nav-left ul {
             list-style: none;
@@ -44,18 +45,19 @@
             flex-wrap: wrap;
             justify-content: center;
             margin: 0;
+            padding: 0;
         }
         .nav-left a {
             color: #000;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
         .nav-left a:hover { color: #2e7d32; }
         .center-title h1 {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             color: #000;
             text-align: center;
@@ -63,7 +65,7 @@
             margin: 0;
         }
         .logo-right img {
-            height: 50px;
+            height: 48px;
             width: auto;
         }
         main {
@@ -78,19 +80,21 @@
             padding: 1.8rem 1.2rem;
             max-width: 1100px;
             backdrop-filter: blur(8px);
+            text-align: justify;
         }
+        /* Espacio blanco entre banner y video */
         main > section:first-child {
-            margin-top: 3rem; /* Margen blanco entre banner y video en móvil */
+            margin-top: 4.5rem; /* Desktop */
         }
         .video-wrapper {
             position: relative;
-            padding-bottom: 42.55%; /* 2.35:1 en desktop */
+            padding-bottom: 42.55%; /* 2.35:1 desktop */
             height: 0;
             overflow: hidden;
             background: #000;
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-            margin: 1.5rem auto;
+            margin: 0 auto;
             max-width: 100%;
         }
         .video-wrapper video {
@@ -118,7 +122,7 @@
             color: #333;
         }
         .section-title {
-            font-size: 2rem; /* Achicado para no ser invasivo */
+            font-size: 2rem;
             font-weight: 800;
             text-align: center;
             margin-bottom: 1rem;
@@ -205,29 +209,83 @@
         }
         .footer-links a:hover { color: #2e7d32; }
 
-        /* Mobile-first optimizations */
+        /* Carrusel modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            text-align: center;
+        }
+        .modal img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+        .modal-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4.5rem;
+            color: rgba(255,255,255,0.9);
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        .modal-btn {
+            margin-top: 1.2rem;
+            background: #2e7d32;
+            color: white;
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Mobile-first */
         @media (max-width: 900px) {
-            .header-inner { justify-content: center; gap: 0.8rem; }
+            .header-inner { justify-content: center; gap: 0.6rem; }
             .nav-left ul { gap: 0.8rem; font-size: 0.85rem; }
-            .center-title h1 { font-size: 1.8rem; }
-            .logo-right img { height: 50px; }
-            main { padding-top: 100px; }
+            .center-title h1 { font-size: 1.7rem; }
+            .logo-right img { height: 48px; }
+            main { padding-top: 95px; }
             section { padding: 1.5rem 1rem; margin: 1.5rem auto; }
             .hero-title h1 { font-size: 1.9rem; }
-            .section-title { font-size: 1.7rem; } /* Títulos más pequeños en móvil */
-            .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; width: 100%; }
-            .video-wrapper { padding-bottom: 56.25%; } /* 16:9 en móvil para que se vea completo */
-            main > section:first-child { margin-top: 3rem; }
+            .section-title { font-size: 1.8rem; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+            .btn { width: 100%; padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+            .video-wrapper { padding-bottom: 56.25%; } /* 16:9 en móvil → completo */
+            main > section:first-child { margin-top: 3.5rem; } /* Espacio blanco en móvil */
         }
         @media (max-width: 600px) {
-            .center-title h1 { font-size: 1.6rem; }
+            .center-title h1 { font-size: 1.5rem; }
             .nav-left a { font-size: 0.8rem; }
-            .logo-right img { height: 45px; }
-            main { padding-top: 90px; }
+            .logo-right img { height: 42px; }
+            main { padding-top: 85px; }
             .hero-title h1 { font-size: 1.7rem; }
             .section-title { font-size: 1.6rem; }
-            .grid-4 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         }
     </style>
 </head>
@@ -355,5 +413,67 @@
     <p>Persos United © 2019/2026 – Todos los derechos reservados.</p>
     <p>“Un equipo, una pasión.”</p>
 </footer>
+
+<!-- Modal Carrusel -->
+<div class="modal" id="imageModal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <div class="modal-content">
+        <span class="modal-arrow prev" onclick="changeImage(-1)">‹</span>
+        <img id="modalImage" src="" alt="Imagen ampliada">
+        <span class="modal-arrow next" onclick="changeImage(1)">›</span>
+        <button class="modal-btn" id="modalBtn">Ver más</button>
+    </div>
+</div>
+
+<script>
+    // Acordeones
+    document.querySelectorAll('.accordion').forEach(acc => {
+        acc.addEventListener('click', () => {
+            const panel = acc.nextElementSibling;
+            const isOpen = panel.classList.contains('show');
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+            if (!isOpen) {
+                panel.classList.add('show');
+                setTimeout(() => acc.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
+            }
+        });
+    });
+
+    // Carrusel para Tienda y Plantel
+    let currentImages = [];
+    let currentIndex = 0;
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalBtn = document.getElementById('modalBtn');
+
+    function openModal(images, index) {
+        currentImages = images;
+        currentIndex = index;
+        modalImg.src = currentImages[currentIndex];
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    function changeImage(direction) {
+        currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+        modalImg.src = currentImages[currentIndex];
+    }
+
+    document.querySelectorAll('#tienda-grid .card, #plantel-grid .card').forEach(card => {
+        card.addEventListener('click', () => {
+            const gridId = card.parentElement.id;
+            const imgs = Array.from(document.querySelectorAll(`#${gridId} img`)).map(img => img.src);
+            const idx = Array.from(document.querySelectorAll(`#${gridId} .card`)).indexOf(card);
+            openModal(imgs, idx);
+        });
+    });
+
+    modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+    });
+</script>
 </body>
 </html>
